@@ -1,5 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Employee, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "is valid with valid attributes" do
+    employee = build(:employee)
+
+    expect(employee).to be_valid
+  end
+
+  it "is invalid without email" do
+    employee = build(:employee, email: nil)
+
+    expect(employee).not_to be_valid
+    end
 end
