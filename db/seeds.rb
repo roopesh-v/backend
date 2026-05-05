@@ -7,3 +7,24 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+records = []
+
+10000.times do
+  records << {
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.unique.email,
+    job_title: Faker::Job.title,
+    country: Faker::Address.country,
+    department: ['Engineering', 'Finance', 'HR'].sample,
+    salary: rand(50000..300000),
+    currency: 'INR',
+    hired_at: Faker::Date.backward(days: 1000),
+    created_at: Time.current,
+    updated_at: Time.current
+  }
+end
+
+Employee.insert_all(records)
+
+puts "Seeded #{Employee.count} employees"
